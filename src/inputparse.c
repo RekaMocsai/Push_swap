@@ -6,7 +6,7 @@
 /*   By: rmocsai <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 11:53:57 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/01/27 11:54:08 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/01/27 13:38:43 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 #include "push_swap.h"
 #include <stdlib.h>
 
-static void	parse_arr(t_stack *stack, int argc, char **argv)
+static void	parse_arr(t_stack *stack, int ac, char **av)
 {
 	int i;
 
 	i = 1;
-	while (i < argc)
+	while (i < ac)
 	{
-		if (!ft_isinteger(argv[i], false))
+		if (!ft_isinteger(av[i], false))
 			terminate(ERROR_MESSAGE); // errors
-		add(stack, create_elem(ft_atoi(argv[i++])));
+		add(stack, create_elem(ft_atoi(av[i++])));
 	}
 }
 
@@ -43,7 +43,7 @@ static void	parse_str(t_stack *stack, char *str)
 	ft_split_free(&numbers);
 }
 
-t_stack		*parse(int argc, char **argv)
+t_stack		*parse(int ac, char **av)
 {
 	t_stack	*stack;
 
@@ -53,11 +53,13 @@ t_stack		*parse(int argc, char **argv)
 	stack->size = 0;
 	stack->pairs = 0;
 	stack->markup_head = NULL;
-	if (argc == 2 && !ft_isnum(argv[1], 10))
-		parse_str(stack, argv[1]);
+	if (ac == 2 && !ft_isnum(av[1], 10))
+		parse_str(stack, av[1]);
 	else
-		parse_arr(stack, argc, argv);
+		parse_arr(stack, ac, av);
 	if (!stack->size)
 		terminate(ERR_NO_NUMBERS);
 	return (stack);
 }
+
+
