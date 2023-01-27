@@ -12,7 +12,7 @@
 
 NAME :=	push_swap
 
-CFLAGS :=	
+CFLAGS :=	-Wall -Werror -Wextra
 
 CC :=	cc
 
