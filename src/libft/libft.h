@@ -6,21 +6,14 @@
 /*   By: rmocsai <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 14:53:06 by rmocsai           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/01/27 11:27:02 by rmocsai          ###   ########.fr       */
-=======
-/*   Updated: 2022/10/30 10:52:04 by rmocsai          ###   ########.fr       */
->>>>>>> 311d378f23f9a98543a9272ec6b96919fb7bcf6a
+/*   Updated: 2023/01/27 12:06:50 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
-<<<<<<< HEAD
 # include <stdarg.h>
-=======
->>>>>>> 311d378f23f9a98543a9272ec6b96919fb7bcf6a
 # define LIBFT_H
 
 typedef struct s_list
@@ -76,7 +69,6 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
-<<<<<<< HEAD
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 //Get_next_line
@@ -108,7 +100,5 @@ int		ft_unsig(unsigned int u);
 int		ft_putnull(void);
 int		ft_putptr(unsigned long ptr);
 int		ft_puthex(unsigned long n, char *base);
-=======
->>>>>>> 311d378f23f9a98543a9272ec6b96919fb7bcf6a
 
 #endif

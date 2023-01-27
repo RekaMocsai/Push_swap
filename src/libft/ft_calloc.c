@@ -17,19 +17,10 @@ void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*ptr;
 	size_t	i;
-<<<<<<< HEAD
 
 	if (nmemb >= 4294967295 || size >= 4294967295)
 		return (NULL);
 	ptr = malloc(size * nmemb);
-=======
-	long	space;
-
-	if (nmemb >= SIZE_MAX || size >= SIZE_MAX)
-		return (NULL);
-	space = size * nmemb;
-	ptr = malloc(space);
->>>>>>> 311d378f23f9a98543a9272ec6b96919fb7bcf6a
 	if (!ptr)
 		return (NULL);
 	i = 0;

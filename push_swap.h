@@ -6,7 +6,7 @@
 /*   By: rmocsai <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:49:51 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/01/26 11:51:26 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/01/27 12:02:03 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef struct s_stacks
 	int		b_size;
 }			t_stacks;
 
+int		main(int ac, char **av);
+void	validity_check(int ac, char **av);
 
 
 
