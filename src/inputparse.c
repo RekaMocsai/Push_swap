@@ -6,60 +6,82 @@
 /*   By: rmocsai <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 11:53:57 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/01/27 13:38:43 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/01/30 15:27:56 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "push_swap.h"
-#include <stdlib.h>
 
-static void	parse_arr(t_stack *stack, int ac, char **av)
+void	parsing_input(int ac, char **av, t_stacks *s)
 {
-	int i;
+	char	**temp;
+	int		i;
+	int		j;
 
-	i = 1;
-	while (i < ac)
+	j = 0;
+	while (ac-- > 1)
 	{
-		if (!ft_isinteger(av[i], false))
-			terminate(ERROR_MESSAGE); // errors
-		add(stack, create_elem(ft_atoi(av[i++])));
+		if (av[j + 1][0] == '\0')
+			free_n_quit(s, "Error\n");
+		if (count_nbrs(av[j + 1], ' ') == 1)
+			s->a[j] = ft_newatoi(av[j + 1]);
+		else if (count_nbrs(av[j + 1], ' ') > 1)
+		{
+			temp = ft_split(av[j + 1], ' ');
+			i = 0;
+			while (temp[i])
+				s->a[j++] = ft_newatoi(temp[i++]);
+			i = 0;
+			while (temp[i])
+				free(temp[i++]);
+			free(temp);
+			j--;
+		}
+		j++;
 	}
 }
 
-static void	parse_str(t_stack *stack, char *str)
+int	count_nbrs(char const *s, char c)
 {
-	char	**numbers;
-	size_t	i;
+	int	count;
 
-	numbers = ft_split(str, ' ');
+	count = 0;
+	while (*s)
+	{
+		if (*s != c)
+		{
+			count++;
+			while (*s != c && *s)
+				s++;
+		}
+		else
+			s++;
+	}
+	return (count);
+}
+
+int	ft_newatoi(const char *str)
+{
+	int			i;
+	long		pol;
+	long long	nbr;
+
+	nbr = 0;
+	pol = 1;
 	i = 0;
-	while (numbers[i])
+	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
+		i++;
+	if (str[i] == '+' || str[i] == '-')
 	{
-		if (!ft_isinteger(numbers[i], false))
-			terminate(ERROR_MESSAGE);
-		add(stack, create_elem(ft_atoi(numbers[i++])));
+		if (str[i] == '-')
+			pol = -1;
+		i++;
 	}
-	ft_split_free(&numbers);
+	while (ft_isdigit(str[i]))
+		nbr = nbr * 10 + (str[i++] - '0');
+	if (!ft_isdigit(str[0]) && str[i] != ' ' && str[i] != 0)
+		free_n_quit(NULL, "Error, invalid input\n");
+	if ((nbr * pol) < -2147483648 || (nbr * pol) > 2147483647)
+		free_n_quit(NULL, "Error, invalid input\n");
+	return ((int)(nbr * pol));
 }
-
-t_stack		*parse(int ac, char **av)
-{
-	t_stack	*stack;
-
-	if (!(stack = (t_stack *)malloc(sizeof(t_stack))))
-		terminate(ERR_MEMALLOC);
-	stack->head = NULL;
-	stack->size = 0;
-	stack->pairs = 0;
-	stack->markup_head = NULL;
-	if (ac == 2 && !ft_isnum(av[1], 10))
-		parse_str(stack, av[1]);
-	else
-		parse_arr(stack, ac, av);
-	if (!stack->size)
-		terminate(ERR_NO_NUMBERS);
-	return (stack);
-}
-
-
