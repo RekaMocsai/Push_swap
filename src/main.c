@@ -6,7 +6,7 @@
 /*   By: rmocsai <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:53:49 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/01/30 13:50:41 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/01/30 17:52:11 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ int	stack_sorted(t_stacks *s)
 	return (1);
 }
 
-void	if_double_or_done_then_quit(t_stacks *s, int i)
+void	check_double_or_done(t_stacks *s)
 {
 	int	j;
+	int i;
 
+	i = 0;
 	if (i == 0)
 	{
 		while (i < s->a_size)
@@ -85,6 +87,8 @@ int	main(int ac, char **av)
 	long int	*new_a;
 
 	validity_check(ac, av);
+	parsing_input(ac, av, s);
+	check_double_or_done(s);
 	
 	return (0);
 }
