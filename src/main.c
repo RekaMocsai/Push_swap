@@ -6,11 +6,11 @@
 /*   By: rmocsai <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:53:49 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/01/30 17:52:11 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/02 17:02:47 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 int	stack_sorted(t_stacks *s)
 {
@@ -29,19 +29,16 @@ int	stack_sorted(t_stacks *s)
 void	check_double_or_done(t_stacks *s)
 {
 	int	j;
-	int i;
+	int	i;
 
 	i = 0;
-	if (i == 0)
+	while (i < s->a_size)
 	{
-		while (i < s->a_size)
-		{
-			if (s->a[i] == s->a[j])
-				free_n_quit(s, "Error, duplicate found\n");
-			j++;
-		}
-		i++;
+		if (s->a[i] == s->a[j])
+			free_n_quit(s, "Error, duplicate found\n");
+		j++;
 	}
+	i++;
 	if (stack_sorted(s))
 		free_n_quit(s, NULL);
 }
@@ -84,11 +81,31 @@ void	validity_check(int ac, char **av)
 int	main(int ac, char **av)
 {
 	t_stacks	*s;
-	long int	*new_a;
+	long int	*new_arr;
 
 	validity_check(ac, av);
+	s = malloc(sizeof(s)i);
+	if (s == NULL)
+		exit(1);
+	init_stacks(ac, av, s);
 	parsing_input(ac, av, s);
 	check_double_or_done(s);
-	
+	new_arr = malloc(s->a_size * sizeof * new_arr);
+	if (new_arr == NULL)
+		free_and_exit_with_message(s, "Error\n");
+	indexing(s, new_arr);
+	if (s->a_size == 2 && s->a[0] > s->a[1])
+		swap("sa", s->a, s->a_size);
+	else if (s->a_size == 3)
+		sort_three(s);
+	else if (s->a_size == 4)
+		sort_four(s);
+	else if (s->a_size == 5)
+		sort_five(s);
+	else
+		radix_sort(s);
+	if (stack_sorted(s))
+		free_n_quit(s, NULL);
+	free_n_quit(s, "Error last minute\n");
 	return (0);
 }

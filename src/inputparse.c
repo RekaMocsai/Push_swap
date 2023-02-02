@@ -6,11 +6,11 @@
 /*   By: rmocsai <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 11:53:57 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/01/30 17:43:26 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/02 17:00:49 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	parsing_input(int ac, char **av, t_stacks *s)
 {
