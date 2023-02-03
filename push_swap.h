@@ -45,6 +45,8 @@ void	indexing(t_stacks *s, long int *new_arr);
 void	sort_three(t_stacks *s);
 void	sort_four(t_stacks *s);
 void	sort_five(t_stacks *s);
+void	radix_sort();
+void	radix_helper();
 
 //rulez
 void	swap(int *arr, int size, char *str);
