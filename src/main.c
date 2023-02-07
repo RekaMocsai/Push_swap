@@ -6,7 +6,7 @@
 /*   By: rmocsai <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:53:49 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/02 17:02:47 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/06 16:32:21 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	check_double_or_done(t_stacks *s)
 	int	i;
 
 	i = 0;
+	j = 0;
 	while (i < s->a_size)
 	{
 		if (s->a[i] == s->a[j])
@@ -64,8 +65,8 @@ void	validity_check(int ac, char **av)
 	int	i;
 	int	j;
 
-	i = 0;
-	while (i++ < ac)
+	i = 1;
+	while (i < ac)
 	{
 		j = 0;
 		while (av[i][j] != '\0')
@@ -75,6 +76,7 @@ void	validity_check(int ac, char **av)
 				free_n_quit(NULL, "Error, input invalid\n");
 			j++;
 		}
+		i++;
 	}
 }
 
@@ -84,7 +86,7 @@ int	main(int ac, char **av)
 	long int	*new_arr;
 
 	validity_check(ac, av);
-	s = malloc(sizeof(s)i);
+	s = malloc(sizeof(s));
 	if (s == NULL)
 		exit(1);
 	init_stacks(ac, av, s);
@@ -92,10 +94,10 @@ int	main(int ac, char **av)
 	check_double_or_done(s);
 	new_arr = malloc(s->a_size * sizeof * new_arr);
 	if (new_arr == NULL)
-		free_and_exit_with_message(s, "Error\n");
+		free_n_quit(s, "Error\n");
 	indexing(s, new_arr);
 	if (s->a_size == 2 && s->a[0] > s->a[1])
-		swap("sa", s->a, s->a_size);
+		swap(s->a, s->a_size, "sa");
 	else if (s->a_size == 3)
 		sort_three(s);
 	else if (s->a_size == 4)

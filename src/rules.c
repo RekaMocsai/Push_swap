@@ -6,7 +6,7 @@
 /*   By: rmocsai <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:20:56 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/02 17:00:30 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/06 16:34:35 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	rotate(int *arr, int size, char *direction, char *str)
 	{
 		temp = arr[size - 1];
 		ft_memmove((arr + 1), arr, sizeof(int) * (size - 1));
-		arr[0] = tmp;
+		arr[0] = temp;
 		ft_printf("%s", "rr");
 	}
 	ft_putendl_fd(str, 1);

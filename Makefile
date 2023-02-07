@@ -6,35 +6,33 @@
 #    By: rmocsai <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 14:29:29 by rmocsai           #+#    #+#              #
-#    Updated: 2023/02/02 16:35:46 by rmocsai          ###   ########.fr        #
+#    Updated: 2023/02/07 16:50:28 by rmocsai          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME :=		push_swap
+NAME =		push_swap
 
-CFLAGS :=	-Wall -Werror -Wextra
+CFLAGS =	-Wall -Werror -Wextra
 
-CC :=		cc -g
+CC =		cc -g
 
-LIBFT :=	./src/libft/
+LIBFT =	./src/libft/
 
-ARCH :=		./src/libft/libft.a
+ARCH =		./src/libft/libft.a
 
-OBJ_P :=	./obj/
-
-SRC :=		./src/main.c \
+SRC =		./src/main.c \
 			./src/inputparse.c \
 			./src/utils.c \
 			./src/rules.c \
+			./src/sorting.c
 
-HEAD :=		push_swap.h
+HEAD =		push_swap.h
 
-OBJ :=		$(SRC:%.c=$(OBJ_P)%.o)
+OBJ =		$(SRC:.c=.o)
 
 .PHONY:	all clean fclean re norm bonus test checker
 
 $(OBJ_P)%o:	%.c
-		@mkdir -p obj
 		@$(CC) $(CFLAGS) -c $< .o $@
 		
 all:		$(NAME)
@@ -55,3 +53,6 @@ re:		fclean all
 
 norm:		$(SRC)
 		norminette -R CheckForbiddenSourceHeader $(SRC) $(HEAD)
+
+test: $(NAME)
+	@
