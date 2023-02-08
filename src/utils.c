@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:20:29 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/06 16:41:39 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/08 09:33:47 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	indexing(t_stacks *s, long int *new_arr)
 	free(new_arr);
 }
 /* GPT cerated bubble sort
-void	create_index(t_stacks *s, long int *new_a)
+void	indexing(t_stacks *s, long int *new_a)
 {
 	int			i;
 	int			j;

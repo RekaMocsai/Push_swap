@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmocsai <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:53:49 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/06 16:32:21 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/08 09:52:05 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,21 @@ int	stack_sorted(t_stacks *s)
 
 void	check_double_or_done(t_stacks *s)
 {
-	int	j;
 	int	i;
+	int	j;
 
 	i = 0;
-	j = 0;
 	while (i < s->a_size)
 	{
-		if (s->a[i] == s->a[j])
-			free_n_quit(s, "Error, duplicate found\n");
-		j++;
+		j = i + 1;
+		while (j < s->a_size)
+		{
+			if (s->a[i] == s->a[j])
+				free_n_quit(s, "Error, duplicate found\n");
+			j++;
+		}
+		i++;
 	}
-	i++;
 	if (stack_sorted(s))
 		free_n_quit(s, NULL);
 }
