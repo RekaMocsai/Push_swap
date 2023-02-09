@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rmocsai <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 14:29:29 by rmocsai           #+#    #+#              #
-#    Updated: 2023/02/07 16:50:28 by rmocsai          ###   ########.fr        #
+#    Updated: 2023/02/09 12:01:08 by rmocsai          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,13 @@ HEAD =		push_swap.h
 
 OBJ =		$(SRC:.c=.o)
 
+CLR_RMV		= \033[0m
+RED		    = \033[1;31m
+GREEN		= \033[1;32m
+YELLOW		= \033[1;33m
+BLUE		= \033[1;34m
+CYAN 		= \033[1;36m
+
 .PHONY:	all clean fclean re norm bonus test checker
 
 $(OBJ_P)%o:	%.c
@@ -40,14 +47,17 @@ all:		$(NAME)
 $(NAME):	$(OBJ)
 		@$(MAKE) -C $(LIBFT)
 		@$(CC) -o $(NAME) $(OBJ) $(ARCH)
+		@echo "$(GREEN)$(NAME) created ✔️"
 
 clean:
 		@rm -f $(OBJ)
-		@echo "object files deleted"
+		@$(MAKE) clean -C $(LIBFT)
+		@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)object files ✔️"
 
 fclean:	clean
 		@rm -f $(NAME)
-		@echo "$(NAME) deleted"
+		@rm -f $(ARCH)
+		@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✔️"
 
 re:		fclean all
 

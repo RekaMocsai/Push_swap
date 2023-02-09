@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:53:49 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/08 09:52:05 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/08 11:35:14 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	check_double_or_done(t_stacks *s)
 		while (j < s->a_size)
 		{
 			if (s->a[i] == s->a[j])
-				free_n_quit(s, "Error, duplicate found\n");
+				free_n_quit(s, "Error, duplicate found");
 			j++;
 		}
 		i++;
@@ -76,7 +76,7 @@ void	validity_check(int ac, char **av)
 		{
 			if (!(ft_isdigit(av[i][j])) && (av[i][j] != ' ') && \
 			(av[i][j] != '-' && av[i][j] != '+'))
-				free_n_quit(NULL, "Error, input invalid\n");
+				free_n_quit(NULL, "Error, input invalid");
 			j++;
 		}
 		i++;
@@ -97,7 +97,7 @@ int	main(int ac, char **av)
 	check_double_or_done(s);
 	new_arr = malloc(s->a_size * sizeof * new_arr);
 	if (new_arr == NULL)
-		free_n_quit(s, "Error\n");
+		free_n_quit(s, "Error");
 	indexing(s, new_arr);
 	if (s->a_size == 2 && s->a[0] > s->a[1])
 		swap(s->a, s->a_size, "sa");
@@ -111,6 +111,6 @@ int	main(int ac, char **av)
 		radix_sort(s);
 	if (stack_sorted(s))
 		free_n_quit(s, NULL);
-	free_n_quit(s, "Error last minute\n");
+	free_n_quit(s, "Error last minute");
 	return (0);
 }

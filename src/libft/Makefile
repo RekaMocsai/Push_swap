@@ -40,20 +40,20 @@ CC		= cc
 
 THEPATH = tests
 
-.PHONY: all clean fclean re norm
+.PHONY: all clean fclean re norm so
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar -crs $(NAME) $(OBJ)
+	@ar -crs $(NAME) $(OBJ)
 
 clean:
-	rm -f $(OBJ)
-	rm -f $(OBJ) $(BONUS_OBJ)
+	@rm -f $(OBJ)
+	@rm -f $(OBJ) $(BONUS_OBJ)
 	@echo "object files deleted"
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 	@echo "$(NAME) deleted"
 
 re: fclean all

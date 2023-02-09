@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rules.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmocsai <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:20:56 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/06 16:34:35 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/09 13:50:40 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	swap(int *arr, int size, char *str)
 	x = arr[0];
 	arr[0] = arr[1];
 	arr[1] = x;
-	ft_putendl_fd(str, 1);
+	ft_printf("%s\n", str);
 }
 
 void	push(t_stacks *s, char *str)
 {
 	int	temp;		
 
-	if (ft_strncmp(str, "pa", 4) == 0)
+	if (ft_strncmp(str, "pa", 3) == 0)
 	{
 		if (s->b_size <= 0)
 			return ;
@@ -39,7 +39,7 @@ void	push(t_stacks *s, char *str)
 		ft_memmove(s->b, (s->b + 1), sizeof(int) * s->b_size);
 		s->a_size++;
 	}
-	else if (ft_strncmp(str, "pb", 4) == 0)
+	else if (ft_strncmp(str, "pb", 3) == 0)
 	{
 		if (s->a_size <= 0)
 			return ;
@@ -50,7 +50,7 @@ void	push(t_stacks *s, char *str)
 		ft_memmove(s->a, (s->a + 1), sizeof(int) * s->a_size);
 		s->b_size++;
 	}
-	ft_putendl_fd(str, 1);
+	ft_printf("%s\n", str);
 }
 
 void	rotate(int *arr, int size, char *direction, char *str)
@@ -73,5 +73,5 @@ void	rotate(int *arr, int size, char *direction, char *str)
 		arr[0] = temp;
 		ft_printf("%s", "rr");
 	}
-	ft_putendl_fd(str, 1);
+	ft_printf("%s\n", str);
 }
