@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sorting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmocsai <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:49:08 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/06 16:42:37 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/13 17:22:13 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ void	sort_four(t_stacks *s)
 		else
 			rotate(s->a, s->a_size, "up", "a");
 	}
-	if (s->b[0] == 0)
-		swap(s->b, s->b_size, "sb");
 	if (s->a[2] != 4)
 	{
 		if (s->a[0] == 4)
@@ -45,7 +43,6 @@ void	sort_four(t_stacks *s)
 	}
 	if (s->a[0] > s->a[1])
 		swap(s->a, s->a_size, "sa");
-	push(s, "pa");
 	push(s, "pa");
 }
 
