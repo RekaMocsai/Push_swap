@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inputparse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmocsai <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 11:53:57 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/02 17:00:49 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/10 14:28:33 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	parsing_input(int ac, char **av, t_stacks *s)
 	while (ac-- > 1)
 	{
 		if (av[j + 1][0] == '\0')
-			free_n_quit(s, "Error\n");
+			free_n_quit(s, "Error");
 		if (count_nbrs(av[j + 1], ' ') == 1)
 			s->a[j] = ft_newatoi(av[j + 1]);
 		else if (count_nbrs(av[j + 1], ' ') > 1)
@@ -80,8 +80,8 @@ int	ft_newatoi(const char *str)
 	while (ft_isdigit(str[i]))
 		nbr = nbr * 10 + (str[i++] - '0');
 	if (!ft_isdigit(str[0]) && str[i] != ' ' && str[i] != 0)
-		free_n_quit(NULL, "Error, invalid input\n");
+		free_n_quit(NULL, "Error, invalid input");
 	if ((nbr * pol) < MIN_INT || (nbr * pol) > MAX_INT)
-		free_n_quit(NULL, "Error, invalid input\n");
+		free_n_quit(NULL, "Error, invalid input");
 	return ((int)(nbr * pol));
 }

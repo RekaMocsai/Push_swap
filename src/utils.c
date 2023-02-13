@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:20:29 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/09 14:22:18 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/10 10:55:05 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	init_stacks(int ac, char **av, t_stacks *s)
 		s->a_size += count_nbrs(av[i + 1], ' ');
 		i++;
 	}
-	s->a = ft_calloc(s->a_size, sizeof(s->a));
+	s->a = ft_calloc(s->a_size, sizeof(int));
 	if (!s->a)
 		free_n_quit(s, "Error initializing\n");
-	s->b = ft_calloc(s->a_size, sizeof(s->b));
+	s->b = ft_calloc(s->a_size, sizeof(int));
 	if (!s->b)
 		free_n_quit(s, "Error initializing\n");
 }

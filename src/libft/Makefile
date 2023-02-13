@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rmocsai <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/04 10:27:01 by rmocsai           #+#    #+#              #
-#    Updated: 2023/02/07 16:51:35 by rmocsai          ###   ########.fr        #
+#    Updated: 2023/02/10 11:39:14 by rmocsai          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,6 @@ $(NAME): $(OBJ)
 clean:
 	@rm -f $(OBJ)
 	@rm -f $(OBJ) $(BONUS_OBJ)
-	@echo "object files deleted"
 
 fclean: clean
 	@rm -f $(NAME)

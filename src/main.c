@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:53:49 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/08 11:35:14 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/10 14:18:08 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	main(int ac, char **av)
 	long int	*new_arr;
 
 	validity_check(ac, av);
-	s = malloc(sizeof(s));
+	s = malloc(sizeof (*s));
 	if (s == NULL)
 		exit(1);
 	init_stacks(ac, av, s);

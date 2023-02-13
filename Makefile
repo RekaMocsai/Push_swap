@@ -6,7 +6,7 @@
 #    By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 14:29:29 by rmocsai           #+#    #+#              #
-#    Updated: 2023/02/09 12:01:08 by rmocsai          ###   ########.fr        #
+#    Updated: 2023/02/10 11:40:20 by rmocsai          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,9 +38,10 @@ BLUE		= \033[1;34m
 CYAN 		= \033[1;36m
 
 .PHONY:	all clean fclean re norm bonus test checker
-
-$(OBJ_P)%o:	%.c
-		@$(CC) $(CFLAGS) -c $< .o $@
+.SILENT:
+ 
+%.o:		%.c
+		@$(CC) $(CFLAGS) -c $< -o $@
 		
 all:		$(NAME)
 
@@ -52,11 +53,13 @@ $(NAME):	$(OBJ)
 clean:
 		@rm -f $(OBJ)
 		@$(MAKE) clean -C $(LIBFT)
+		@echo "$(RED)Deleting $(CYAN)LIBFT $(CLR_RMV)object files"
 		@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)object files ✔️"
 
 fclean:	clean
 		@rm -f $(NAME)
 		@rm -f $(ARCH)
+		@ echo "$(RED)Deleting $(CYAN)LIBFT $(CLR_RMV)archive ✔️"
 		@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary ✔️"
 
 re:		fclean all
