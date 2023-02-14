@@ -6,7 +6,7 @@
 #    By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 14:29:29 by rmocsai           #+#    #+#              #
-#    Updated: 2023/02/13 16:25:02 by rmocsai          ###   ########.fr        #
+#    Updated: 2023/02/14 17:22:15 by rmocsai          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,27 +41,27 @@ CYAN 		= \033[1;36m
 .SILENT:
  
 %.o:		%.c
-		@$(CC) $(CFLAGS) -c $< -o $@
+		$(CC) $(CFLAGS) -c $< -o $@
 		
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-		@echo "Compilation in process..."
-		@$(MAKE) -C $(LIBFT)
-		@$(CC) -o $(NAME) $(OBJ) $(ARCH)
-		@echo "$(CYAN)$(NAME) $(CLR_RM)created ✔️"
+		echo "Compilation in process..."
+		$(MAKE) -C $(LIBFT)
+		$(CC) -o $(NAME) $(OBJ) $(ARCH)
+		echo "$(CYAN)$(NAME) $(CLR_RM)created ✔️"
 
 clean:
-		@rm -f $(OBJ)
-		@$(MAKE) clean -C $(LIBFT)
-		@echo "$(RED)Deleting $(CYAN)LIBFT $(CLR_RM)object files"
-		@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RM)object files ✔️"
+		rm -f $(OBJ)
+		$(MAKE) clean -C $(LIBFT)
+		echo "$(RED)Deleting $(CYAN)LIBFT $(CLR_RM)object files"
+		echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RM)object files ✔️"
 
 fclean:	clean
-		@rm -f $(NAME)
-		@rm -f $(ARCH)
-		@ echo "$(RED)Deleting $(CYAN)LIBFT $(CLR_RM)archive ✔️"
-		@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RM)binary ✔️"
+		rm -f $(NAME)
+		rm -f $(ARCH)
+		echo "$(RED)Deleting $(CYAN)LIBFT $(CLR_RM)archive ✔️"
+		echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RM)binary ✔️"
 
 re:		fclean all
 
@@ -69,4 +69,4 @@ norm:		$(SRC)
 		norminette -R CheckForbiddenSourceHeader $(SRC) $(HEAD)
 
 test: $(NAME)
-	@
+	

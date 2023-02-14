@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:49:51 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/10 10:52:51 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/14 17:22:14 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		main(int ac, char **av);
 void	validity_check(int ac, char **av);
 void	free_n_quit(t_stacks *s, char *error);
 void	check_double_or_done(t_stacks *s);
-int		stack_sorted(t_stacks *s);
+void	pathfindes(t_stacks *s);
 
 //inputparsing
 void	parsing_input(int ac, char **av, t_stacks *s);
@@ -39,6 +39,7 @@ int		ft_newatoi(const char *str);
 
 //utils
 void	init_stacks(int ac, char **av, t_stacks *s);
+int		stack_sorted(t_stacks *s);
 void	indexing(t_stacks *s, long int *new_arr);
 
 //sorting

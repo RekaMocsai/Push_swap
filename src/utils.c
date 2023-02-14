@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:20:29 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/10 10:55:05 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/14 17:22:18 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,20 @@ void	init_stacks(int ac, char **av, t_stacks *s)
 	s->b = ft_calloc(s->a_size, sizeof(int));
 	if (!s->b)
 		free_n_quit(s, "Error initializing\n");
+}
+
+int	stack_sorted(t_stacks *s)
+{
+	int	i;
+
+	i = 0;
+	while (i < s->a_size - 1)
+	{
+		if (s->a[i] > s->a[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 void	indexing(t_stacks *s, long int *new_arr)

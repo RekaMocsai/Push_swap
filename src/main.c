@@ -6,24 +6,26 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:53:49 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/10 14:18:08 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/14 17:22:13 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-int	stack_sorted(t_stacks *s)
+void	pathfinder(t_stacks *s)
 {
-	int	i;
-
-	i = 0;
-	while (i < s->a_size - 1)
-	{
-		if (s->a[i] > s->a[i + 1])
-			return (0);
-		i++;
-	}
-	return (1);
+	if (s->a_size == 2 && s->a[0] > s->a[1])
+		swap(s->a, s->a_size, "sa");
+	else if (s->a_size == 3)
+		sort_three(s);
+	else if (s->a_size == 4)
+		sort_four(s);
+	else if (s->a_size == 5)
+		sort_five(s);
+	else
+		radix_sort(s);
+	if (stack_sorted(s))
+		free_n_quit(s, NULL);
 }
 
 void	check_double_or_done(t_stacks *s)
@@ -99,18 +101,7 @@ int	main(int ac, char **av)
 	if (new_arr == NULL)
 		free_n_quit(s, "Error");
 	indexing(s, new_arr);
-	if (s->a_size == 2 && s->a[0] > s->a[1])
-		swap(s->a, s->a_size, "sa");
-	else if (s->a_size == 3)
-		sort_three(s);
-	else if (s->a_size == 4)
-		sort_four(s);
-	else if (s->a_size == 5)
-		sort_five(s);
-	else
-		radix_sort(s);
-	if (stack_sorted(s))
-		free_n_quit(s, NULL);
+	pathfinder(s);
 	free_n_quit(s, "Error last minute");
 	return (0);
 }
