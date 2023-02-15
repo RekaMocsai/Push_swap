@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:20:29 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/14 17:22:18 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/15 13:08:35 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,11 @@ int	stack_sorted(t_stacks *s)
 }
 
 void	indexing(t_stacks *s, long int *new_arr)
-{
+//{
+	
+//}
+
+{	
 	int		i;
 	int		j;
 	int		k;
@@ -74,6 +78,7 @@ void	indexing(t_stacks *s, long int *new_arr)
 	}
 	free(new_arr);
 }
+
 /* GPT cerated bubble sort
 void	indexing(t_stacks *s, long int *new_a)
 {
