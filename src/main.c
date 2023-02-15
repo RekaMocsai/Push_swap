@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:53:49 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/14 17:22:13 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/15 16:46:07 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,16 @@ void	pathfinder(t_stacks *s)
 		sort_five(s);
 	else
 		radix_sort(s);
+	int i = 0;    //remove later
+	while (i < s->a_size)
+	{	
+		ft_printf("%d  ", s->a[i]);
+		ft_printf("%d  \n", i);
+		i++;
+	}
 	if (stack_sorted(s))
 		free_n_quit(s, NULL);
+	free_n_quit(s, "Error last minute");
 }
 
 void	check_double_or_done(t_stacks *s)
@@ -88,7 +96,7 @@ void	validity_check(int ac, char **av)
 int	main(int ac, char **av)
 {
 	t_stacks	*s;
-	long int	*new_arr;
+	int	*new_arr;
 
 	validity_check(ac, av);
 	s = malloc(sizeof (*s));
@@ -102,6 +110,5 @@ int	main(int ac, char **av)
 		free_n_quit(s, "Error");
 	indexing(s, new_arr);
 	pathfinder(s);
-	free_n_quit(s, "Error last minute");
 	return (0);
 }

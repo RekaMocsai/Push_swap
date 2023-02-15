@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:20:29 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/15 13:08:35 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/15 16:55:54 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,28 @@ int	stack_sorted(t_stacks *s)
 	return (1);
 }
 
-void	indexing(t_stacks *s, long int *new_arr)
-//{
-	
-//}
+void	indexing(t_stacks *s, int *new_arr)
+{
+	int	i;
+	int	j;
 
+	i = -1;
+	while (i++ < s->a_size)
+		new_arr[i] = s->a[i];
+	bubblesort(new_arr, s->a_size);
+	i = -1;
+	while (++i < s->a_size)
+	{
+		j = -1;
+		while (j++ < s->a_size)
+		{
+			if (s->a[i] == new_arr[j])
+				s->a[i] = j;
+		}
+	}
+	free(new_arr);
+}
+/*
 {	
 	int		i;
 	int		j;
@@ -78,47 +95,29 @@ void	indexing(t_stacks *s, long int *new_arr)
 	}
 	free(new_arr);
 }
+*/
 
-/* GPT cerated bubble sort
-void	indexing(t_stacks *s, long int *new_a)
+void	bubblesort(int *new_arr, int size)
 {
-	int			i;
-	int			j;
-	int			k;
-	long int	min;
-	int			flag;
+	int	sort;
+	int	i;
+	int	swap;
 
-	i = s->a_size;
-	while (i--)
-		new_a[i] = s->a[i];
-	for (i = 0; i < s->a_size - 1; i++)
+	sort = 0;
+	while (sort != 1)
 	{
-		flag = 0;
-		for (j = 0; j < s->a_size - i - 1; j++)
+		sort = 1;
+		i = 0;
+		while (i < (size - 1))
 		{
-			if (new_a[j] > new_a[j + 1])
+			if (new_arr[i] > new_arr[i + 1])
 			{
-				swap(&new_a[j], &new_a[j + 1], );
-				flag = 1;
+				swap = new_arr[i];
+				new_arr[i] = new_arr[i + 1];
+				new_arr[i + 1] = swap;
+				sort = 0;
 			}
+			i++;
 		}
-		if (flag == 0)
-			break;
 	}
-	for (i = 0; i < s->a_size; i++)
-	{
-		k = 0;
-		min = new_a[i];
-		while (k < s->a_size && s->a[k] != min)
-			k++;
-		s->a[k] = i;
-	}
-	free(new_a);
 }
-
-void swap(long int *a, long int *b)
-{
-	long int temp = *a;
-	*a = *b;
-	*b = temp;
-}*/

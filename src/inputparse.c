@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 11:53:57 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/15 13:08:02 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/15 13:11:07 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	ft_newatoi(const char *str)
 		i++;
 	}
 	if (!ft_isdigit(str[i]))
-		free_n_quit(NULL, "Error, invalid input1");
+		free_n_quit(NULL, "Error, invalid input");
 	while (ft_isdigit(str[i]))
 		nbr = nbr * 10 + (str[i++] - '0');
 	if (str[i] != ' ' && str[i] != '\0')

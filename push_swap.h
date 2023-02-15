@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:49:51 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/15 12:58:21 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/15 15:30:21 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int		ft_newatoi(const char *str);
 //utils
 void	init_stacks(int ac, char **av, t_stacks *s);
 int		stack_sorted(t_stacks *s);
-void	indexing(t_stacks *s, long int *new_arr);
+void	indexing(t_stacks *s, int *new_arr);
+void	bubblesort(int *new_arr, int size);
 
 //sorting
 void	sort_three(t_stacks *s);
