@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:53:49 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/15 16:46:07 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/22 12:21:59 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	pathfinder(t_stacks *s)
 	}
 	if (stack_sorted(s))
 		free_n_quit(s, NULL);
-	free_n_quit(s, "Error last minute");
+	else
+		free_n_quit(s, "Error last minute - stack not sorted");
 }
 
 void	check_double_or_done(t_stacks *s)
@@ -96,7 +97,7 @@ void	validity_check(int ac, char **av)
 int	main(int ac, char **av)
 {
 	t_stacks	*s;
-	int	*new_arr;
+	int			*new_arr;
 
 	validity_check(ac, av);
 	s = malloc(sizeof (*s));
@@ -107,7 +108,7 @@ int	main(int ac, char **av)
 	check_double_or_done(s);
 	new_arr = malloc(s->a_size * sizeof * new_arr);
 	if (new_arr == NULL)
-		free_n_quit(s, "Error");
+		free_n_quit(s, "Error allocating array");
 	indexing(s, new_arr);
 	pathfinder(s);
 	return (0);

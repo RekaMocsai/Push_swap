@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:20:29 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/15 16:55:54 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/22 12:16:35 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,15 @@ void	indexing(t_stacks *s, int *new_arr)
 	while (++i < s->a_size)
 	{
 		j = -1;
-		while (j++ < s->a_size)
+		while (j++ < s->a_size - 1)
 		{
 			if (s->a[i] == new_arr[j])
 				s->a[i] = j;
 		}
 	}
+	ft_printf("%d  ", s->a[0]);
+	ft_printf("%d  ", s->a[1]);
+	ft_printf("%d \n", s->a[2]);
 	free(new_arr);
 }
 /*
