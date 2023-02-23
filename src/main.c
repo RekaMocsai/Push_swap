@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:53:49 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/23 13:09:09 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/23 17:40:02 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ void	pathfinder(t_stacks *s)
 		sort_five(s);
 	else
 		radix_sort(s);
-	int i = 0;    //remove later!!!
+	/*int i = 0;    //remove later!!!
 	ft_printf("end res:\n");
 	while (i < s->a_size)
 	{	
 		ft_printf("%d  ", s->a[i]);
 		ft_printf("%d  \n", i);
 		i++;
-	}
+	}*/
 	if (stack_sorted(s))
 		free_n_quit(s, NULL);
 	else

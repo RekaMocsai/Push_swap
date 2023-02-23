@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:49:08 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/23 13:14:09 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/23 17:46:23 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ void	sort_four(t_stacks *s)
 {
 	while (s->b_size < 1)
 	{
- 		if (s->a[0] == 0)
+		if (s->a[0] == 0)
 			push(s, "pb");
+		else if (s->a[3] == 0)
+			rotate(s->a, s->a_size, "down", "a");
 		else
-			rotate(s->a, s->a_size, "up", "a"); //down?
+			rotate(s->a, s->a_size, "up", "a");
 	}
 	sort_three(s, 1);
 	push(s, "pa");
@@ -44,8 +46,15 @@ void	sort_five(t_stacks *s)
 	{
 		if (s->a[0] == 0 || s->a[0] == 1)
 			push(s, "pb");
+		else if (s->a[4] == 0)
+			rotate(s->a, s->a_size, "down", "a");
+		else if (s->a[3] == 0)
+		{
+			rotate(s->a, s->a_size, "down", "a");
+			rotate(s->a, s->a_size, "down", "a");
+		}
 		else
-			rotate(s->a, s->a_size, "up", "a"); //rotate other dir
+			rotate(s->a, s->a_size, "up", "a");
 	}
 	if (s->b[0] == 0)
 		swap(s->b, s->b_size, "sb");
@@ -69,25 +78,25 @@ void	radix_sort(t_stacks *s)
 
 {
 	int	j;
-	int	bit_size;
+	int	bit_count;
 	int	size;
 
-	bit_size = 0;
+	bit_count = 0;
 	size = s->a_size;
-	while (size > 1 && ++bit_size)
+	while (++bit_count && size > 1)
 		size /= 2;
 	j = -1;
-	while (++j <= bit_size)
+	while (++j <= bit_count)
 	{
 		size = s->a_size;
-		while (size-- && !stack_sorted(s))
+		while (size--)
 		{
-			if (((s->a[0] >> j) & 1) == 0)
-				push(s, "pb");
-			else
+			if (((s->a[0] >> j) & 1))
 				rotate(s->a, s->a_size, "up", "a");
+			else
+				push(s, "pb");
 		}
-		radix_sort_helper(s, s->b_size, bit_size, j + 1);
+		radix_sort_helper(s, s->b_size, bit_count, j + 1);
 	}
 	while (s->b_size != 0)
 		push(s, "pa");

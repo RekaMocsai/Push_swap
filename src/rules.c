@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:20:56 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/14 17:22:16 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/23 17:05:55 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	push(t_stacks *s, char *str)
 		temp = s->b[0];
 		ft_memmove((s->a + 1), s->a, sizeof(int) * s->a_size);
 		s->a[0] = temp;
+		s->a_size++;
 		s->b_size--;
 		ft_memmove(s->b, (s->b + 1), sizeof(int) * s->b_size);
-		s->a_size++;
 	}
 	else if (ft_strncmp(str, "pb", 3) == 0)
 	{
@@ -46,9 +46,9 @@ void	push(t_stacks *s, char *str)
 		temp = s->a[0];
 		ft_memmove((s->b + 1), s->b, sizeof(int) * s->b_size);
 		s->b[0] = temp;
+		s->b_size++;
 		s->a_size--;
 		ft_memmove(s->a, (s->a + 1), sizeof(int) * s->a_size);
-		s->b_size++;
 	}
 	ft_printf("%s\n", str);
 }
