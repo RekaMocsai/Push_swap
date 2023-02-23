@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:53:49 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/22 12:21:59 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/23 13:09:09 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@ void	pathfinder(t_stacks *s)
 	if (s->a_size == 2 && s->a[0] > s->a[1])
 		swap(s->a, s->a_size, "sa");
 	else if (s->a_size == 3)
-		sort_three(s);
+		sort_three(s, 0);
 	else if (s->a_size == 4)
 		sort_four(s);
 	else if (s->a_size == 5)
 		sort_five(s);
 	else
 		radix_sort(s);
-	int i = 0;    //remove later
+	int i = 0;    //remove later!!!
+	ft_printf("end res:\n");
 	while (i < s->a_size)
 	{	
 		ft_printf("%d  ", s->a[i]);
@@ -108,7 +109,7 @@ int	main(int ac, char **av)
 	check_double_or_done(s);
 	new_arr = malloc(s->a_size * sizeof * new_arr);
 	if (new_arr == NULL)
-		free_n_quit(s, "Error allocating array");
+		free_n_quit(s, "Error allocating new array");
 	indexing(s, new_arr);
 	pathfinder(s);
 	return (0);

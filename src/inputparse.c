@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 11:53:57 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/15 13:11:07 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/23 12:30:36 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ void	parsing_input(int ac, char **av, t_stacks *s)
 			j--;
 		}
 		j++;
+	}
+	int k = 0; //remove later!!!
+	ft_printf("stack a: ");
+	while (k < s->a_size)
+	{
+		ft_printf("%d ", s->a[k]);
+		k++;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:49:51 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/15 15:30:21 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/23 13:11:12 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	indexing(t_stacks *s, int *new_arr);
 void	bubblesort(int *new_arr, int size);
 
 //sorting
-void	sort_three(t_stacks *s);
+void	sort_three(t_stacks *s, int x);
 void	sort_four(t_stacks *s);
 void	sort_five(t_stacks *s);
 void	radix_sort(t_stacks *s);

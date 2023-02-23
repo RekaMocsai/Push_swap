@@ -6,17 +6,17 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:49:08 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/15 15:32:05 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/23 13:14:09 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	sort_three(t_stacks *s)
+void	sort_three(t_stacks *s, int x)
 {
-	if (s->a[2] != 2)
+	if (s->a[2] != x + 2)
 	{
-		if (s->a[0] == 2)
+		if (s->a[0] == x + 2)
 			rotate(s->a, s->a_size, "up", "a");
 		else
 			rotate(s->a, s->a_size, "down", "a");
@@ -27,22 +27,14 @@ void	sort_three(t_stacks *s)
 
 void	sort_four(t_stacks *s)
 {
-	while (s->b_size <= 1)
+	while (s->b_size < 1)
 	{
-		if (s->a[0] == 0 || s->a[0] == 1)
+ 		if (s->a[0] == 0)
 			push(s, "pb");
 		else
-			rotate(s->a, s->a_size, "up", "a");
+			rotate(s->a, s->a_size, "up", "a"); //down?
 	}
-	if (s->a[2] != 4)
-	{
-		if (s->a[0] == 4)
-			rotate(s->a, s->a_size, "up", "a");
-		else
-			rotate(s->a, s->a_size, "down", "a");
-	}
-	if (s->a[0] > s->a[1])
-		swap(s->a, s->a_size, "sa");
+	sort_three(s, 1);
 	push(s, "pa");
 }
 
@@ -53,19 +45,11 @@ void	sort_five(t_stacks *s)
 		if (s->a[0] == 0 || s->a[0] == 1)
 			push(s, "pb");
 		else
-			rotate(s->a, s->a_size, "up", "a");
+			rotate(s->a, s->a_size, "up", "a"); //rotate other dir
 	}
 	if (s->b[0] == 0)
 		swap(s->b, s->b_size, "sb");
-	if (s->a[2] != 4)
-	{
-		if (s->a[0] == 4)
-			rotate(s->a, s->a_size, "up", "a");
-		else
-			rotate(s->a, s->a_size, "down", "a");
-	}
-	if (s->a[0] > s->a[1])
-		swap(s->a, s->a_size, "sa");
+	sort_three(s, 2);
 	push(s, "pa");
 	push(s, "pa");
 }

@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:20:29 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/22 12:16:35 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/23 12:54:55 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,33 @@ void	indexing(t_stacks *s, int *new_arr)
 	while (i++ < s->a_size)
 		new_arr[i] = s->a[i];
 	bubblesort(new_arr, s->a_size);
+	int b = 0; //remove later!!!
+	ft_printf("\nbubblesort: ");
+	while (b < s->a_size)
+	{
+		ft_printf("%d ", new_arr[b]);
+		b++;
+	}
 	i = -1;
 	while (++i < s->a_size)
 	{
 		j = -1;
-		while (j++ < s->a_size - 1)
+		while (++j < s->a_size)
 		{
 			if (s->a[i] == new_arr[j])
-				s->a[i] = j;
+			{
+					s->a[i] = j;
+					j = s->a_size + 1;
+			}
 		}
 	}
-	ft_printf("%d  ", s->a[0]);
-	ft_printf("%d  ", s->a[1]);
-	ft_printf("%d \n", s->a[2]);
+	int k = 0; //remove later!!!
+	ft_printf("\nindexed arr: ");
+	while (k < s->a_size)
+	{
+		ft_printf("%d ", s->a[k]);
+		k++;
+	}
 	free(new_arr);
 }
 /*
