@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:49:51 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/23 13:11:12 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/24 12:27:12 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int		ft_newatoi(const char *str);
 
 //utils
 void	init_stacks(int ac, char **av, t_stacks *s);
-int		stack_sorted(t_stacks *s);
 void	indexing(t_stacks *s, int *new_arr);
 void	bubblesort(int *new_arr, int size);
 
@@ -48,7 +47,7 @@ void	sort_three(t_stacks *s, int x);
 void	sort_four(t_stacks *s);
 void	sort_five(t_stacks *s);
 void	radix_sort(t_stacks *s);
-void	radix_helper(t_stacks *s, int b_size, int bit_size, int j);
+int		stack_sorted(t_stacks *s);
 
 //rulez
 void	swap(int *arr, int size, char *str);

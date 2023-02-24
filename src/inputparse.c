@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 11:53:57 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/23 12:30:36 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/24 09:45:03 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	parsing_input(int ac, char **av, t_stacks *s)
 	while (ac-- > 1)
 	{
 		if (av[j + 1][0] == '\0')
-			free_n_quit(s, "Error");
+			free_n_quit(s, "Error, invalid input");
 		if (count_nbrs(av[j + 1], ' ') == 1)
 			s->a[j] = ft_newatoi(av[j + 1]);
 		else if (count_nbrs(av[j + 1], ' ') > 1)
@@ -38,13 +38,6 @@ void	parsing_input(int ac, char **av, t_stacks *s)
 			j--;
 		}
 		j++;
-	}
-	int k = 0; //remove later!!!
-	ft_printf("stack a: ");
-	while (k < s->a_size)
-	{
-		ft_printf("%d ", s->a[k]);
-		k++;
 	}
 }
 

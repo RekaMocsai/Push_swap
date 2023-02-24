@@ -6,7 +6,7 @@
 #    By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 14:29:29 by rmocsai           #+#    #+#              #
-#    Updated: 2023/02/14 17:22:15 by rmocsai          ###   ########.fr        #
+#    Updated: 2023/02/24 10:32:07 by rmocsai          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,8 @@ SRC =		./src/main.c \
 HEAD =		push_swap.h
 
 OBJ =		$(SRC:.c=.o)
+
+CHECKER =	./push_swap $(ARG) | ./checker_linux $(ARG)
 
 CLR_RM		= \033[0m
 RED		    = \033[1;31m
@@ -67,6 +69,11 @@ re:		fclean all
 
 norm:		$(SRC)
 		norminette -R CheckForbiddenSourceHeader $(SRC) $(HEAD)
+size ?=	500
 
 test: $(NAME)
-	
+		$(eval ARG = $(shell seq -1000 1000 | shuf -n $(size)))
+		echo "Checker result: "
+		$(CHECKER)
+		echo "Instructions count: "
+		./push_swap $(ARG) | wc -l

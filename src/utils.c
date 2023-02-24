@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:20:29 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/23 17:40:34 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/24 12:27:22 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,6 @@ void	init_stacks(int ac, char **av, t_stacks *s)
 		free_n_quit(s, "Error initializing\n");
 }
 
-int	stack_sorted(t_stacks *s)
-{
-	int	i;
-
-	i = 0;
-	while (i < s->a_size - 1)
-	{
-		if (s->a[i] > s->a[i + 1])
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 void	indexing(t_stacks *s, int *new_arr)
 {
 	int	i;
@@ -55,13 +41,6 @@ void	indexing(t_stacks *s, int *new_arr)
 	while (i++ < s->a_size)
 		new_arr[i] = s->a[i];
 	bubblesort(new_arr, s->a_size);
-	/*int b = 0; //remove later!!!
-	ft_printf("\nbubblesort: ");
-	while (b < s->a_size)
-	{
-		ft_printf("%d ", new_arr[b]);
-		b++;
-	}*/
 	i = -1;
 	while (++i < s->a_size)
 	{
@@ -70,49 +49,13 @@ void	indexing(t_stacks *s, int *new_arr)
 		{
 			if (s->a[i] == new_arr[j])
 			{
-					s->a[i] = j;
-					j = s->a_size + 1;
+				s->a[i] = j;
+				j = s->a_size + 1;
 			}
 		}
 	}
-	/*int k = 0; //remove later!!!
-	ft_printf("\nindexed arr: ");
-	while (k < s->a_size)
-	{
-		ft_printf("%d ", s->a[k]);
-		k++;
-	}*/
 	free(new_arr);
 }
-/*
-{	
-	int		i;
-	int		j;
-	int		k;
-	long	min;
-
-	i = s->a_size;
-	while (i--)
-		new_arr[i] = s->a[i];
-	i = 0;
-	while (i < s->a_size)
-	{
-		j = 0;
-		min = MIN_INT * -1;
-		while (j < s->a_size)
-		{
-			if (new_arr[j++] < min)
-			{
-				min = new_arr[j - 1];
-				k = j - 1;
-			}
-		}
-		new_arr[k] = MIN_INT * -1;
-		s->a[k] = i++;
-	}
-	free(new_arr);
-}
-*/
 
 void	bubblesort(int *new_arr, int size)
 {
