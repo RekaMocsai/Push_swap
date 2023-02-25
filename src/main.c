@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:53:49 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/24 09:42:48 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/25 11:18:02 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	main(int ac, char **av)
 	init_stacks(ac, av, s);
 	parsing_input(ac, av, s);
 	check_double_or_done(s);
-	new_arr = malloc(s->a_size * sizeof * new_arr);
+	new_arr = ft_calloc(s->a_size, sizeof(int));
 	if (new_arr == NULL)
 		free_n_quit(s, "Error allocating new array");
 	indexing(s, new_arr);

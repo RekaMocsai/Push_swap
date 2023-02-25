@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:20:29 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/24 12:27:22 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/25 11:23:35 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	indexing(t_stacks *s, int *new_arr)
 	int	j;
 
 	i = -1;
-	while (i++ < s->a_size)
+	while (++i < s->a_size)
 		new_arr[i] = s->a[i];
 	bubblesort(new_arr, s->a_size);
 	i = -1;
