@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 11:53:57 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/25 15:09:25 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/25 15:29:11 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	parsing_input(int ac, char **av, t_stacks *s)
 	{
 		if (av[j + 1][0] == '\0')
 			free_n_quit(s, "Error, invalid input");
+		//how to free temp? or check here for atoi mistakes
 		if (count_nbrs(av[j + 1], ' ') == 1)
 			s->a[j] = ft_newatoi(av[j + 1], s);
 		else if (count_nbrs(av[j + 1], ' ') > 1)
