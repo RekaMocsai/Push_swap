@@ -6,7 +6,7 @@
 #    By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 14:29:29 by rmocsai           #+#    #+#              #
-#    Updated: 2023/02/24 10:32:07 by rmocsai          ###   ########.fr        #
+#    Updated: 2023/02/25 12:05:56 by rmocsai          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ re:		fclean all
 
 norm:		$(SRC)
 		norminette -R CheckForbiddenSourceHeader $(SRC) $(HEAD)
-size ?=	500
+size ?=	5
 
 test: $(NAME)
 		$(eval ARG = $(shell seq -1000 1000 | shuf -n $(size)))
