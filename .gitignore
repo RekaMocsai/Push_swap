@@ -6,3 +6,4 @@ checker_linux
 checker
 *.o
 push_swap_visualizer
+libft.a
