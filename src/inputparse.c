@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 11:53:57 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/25 15:29:11 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/27 11:12:52 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ void	parsing_input(int ac, char **av, t_stacks *s)
 	j = 0;
 	while (ac-- > 1)
 	{
-		if (av[j + 1][0] == '\0')
+		if (av[j + 1][0] == '\0' || !mistake_checker(ac, av))
 			free_n_quit(s, "Error, invalid input");
-		//how to free temp? or check here for atoi mistakes
 		if (count_nbrs(av[j + 1], ' ') == 1)
 			s->a[j] = ft_newatoi(av[j + 1], s);
 		else if (count_nbrs(av[j + 1], ' ') > 1)
@@ -40,6 +39,30 @@ void	parsing_input(int ac, char **av, t_stacks *s)
 		}
 		j++;
 	}
+}
+
+int	mistake_checker(int ac, char **av)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = 1;
+	j = 0;
+	k = -1;
+	while (++k < ac)
+	{
+		while (av[i][j] != '\0')
+		{
+			if (av[i][j] == '-' || av[i][j] == '+' )
+				if ((ft_isdigit(av[i][j - 1]) && j != 0) || \
+				!ft_isdigit(av[i][j + 1]))
+					return (0);
+			j++;
+		}	
+		i++;
+	}
+	return (1);
 }
 
 int	count_nbrs(char const *s, char c)
@@ -63,9 +86,9 @@ int	count_nbrs(char const *s, char c)
 
 int	ft_newatoi(const char *str, t_stacks *s)
 {
-	int			i;
-	long		pol;
-	long long	nbr;
+	int		i;
+	int		pol;
+	long	nbr;
 
 	nbr = 0;
 	pol = 1;
