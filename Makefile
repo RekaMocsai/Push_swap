@@ -6,7 +6,7 @@
 #    By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 14:29:29 by rmocsai           #+#    #+#              #
-#    Updated: 2023/02/25 12:05:56 by rmocsai          ###   ########.fr        #
+#    Updated: 2023/02/27 17:07:25 by rmocsai          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,8 +72,10 @@ norm:		$(SRC)
 size ?=	5
 
 test: $(NAME)
-		$(eval ARG = $(shell seq -1000 1000 | shuf -n $(size)))
-		echo "Checker result: "
+		$(eval ARG = $(shell seq -5000 5000 | shuf -n $(size)))
+		echo "$(BLUE)Checker result:$(CLR_RM) "
 		$(CHECKER)
-		echo "Instructions count: "
+		echo "$(BLUE)Instructions count$(CLR_RM): "
 		./push_swap $(ARG) | wc -l
+		echo "$(BLUE)Valgrind result$(CLR_RM): "
+		valgrind ./push_swap $(ARG) | grep "All heap blocks were freed" | echo "$(GREEN)OK$(CLR_RM)"

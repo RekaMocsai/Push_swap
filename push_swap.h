@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:49:51 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/27 10:56:18 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/27 16:38:17 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	pathfinder(t_stacks *s);
 
 //inputparsing
 void	parsing_input(int ac, char **av, t_stacks *s);
-int		mistake_checker(int ac, char **av);
 int		count_nbrs(char const *s, char c);
 int		ft_newatoi(const char *str, t_stacks *s);
 

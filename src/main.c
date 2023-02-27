@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:53:49 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/25 11:18:02 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/02/27 17:40:45 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,12 @@ void	validity_check(int ac, char **av)
 		{
 			if (!(ft_isdigit(av[i][j])) && (av[i][j] != ' ') && \
 			(av[i][j] != '-' && av[i][j] != '+'))
-				free_n_quit(NULL, "Error, input invalid");
+				free_n_quit(NULL, "Error, input invalid (wrong character)");
+			else if (av[i][j] == '-' && av[i][j] == '+')
+			{
+				if (ft_isdigit(av[i][j - 1] && j != 0))
+					free_n_quit(NULL, "Error, input invalid (invalid - or +)");
+			}
 			j++;
 		}
 		i++;
@@ -95,13 +100,13 @@ int	main(int ac, char **av)
 	validity_check(ac, av);
 	s = malloc(sizeof (*s));
 	if (s == NULL)
-		exit(1);
+		exit(1); //free_n_quit(s, "Error, at allocating struct")
 	init_stacks(ac, av, s);
 	parsing_input(ac, av, s);
 	check_double_or_done(s);
 	new_arr = ft_calloc(s->a_size, sizeof(int));
 	if (new_arr == NULL)
-		free_n_quit(s, "Error allocating new array");
+		free_n_quit(s, "Error, at allocating new array");
 	indexing(s, new_arr);
 	pathfinder(s);
 	return (0);
