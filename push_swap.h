@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:49:51 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/27 16:38:17 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/03/01 15:03:55 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@ void	pathfinder(t_stacks *s);
 
 //inputparsing
 void	parsing_input(int ac, char **av, t_stacks *s);
-int		count_nbrs(char const *s, char c);
-int		ft_newatoi(const char *str, t_stacks *s);
+void	justfree(char **temp);
+char	*strjoiner(int ac, char **av, t_stacks *s);
+long	ft_newatoi(const char *str);
 
 //utils
 void	init_stacks(int ac, char **av, t_stacks *s);
+int		count_nbrs(char const *s, char c);
 void	indexing(t_stacks *s, int *new_arr);
 void	bubblesort(int *new_arr, int size);
 
@@ -54,12 +56,12 @@ void	swap(int *arr, int size, char *str);
 void	push(t_stacks *s, char *str);
 void	rotate(int *arr, int size, char *direction, char *str);
 
-# ifndef MIN_INT
-#  define MIN_INT -2147483648
+# ifndef MIN_I
+#  define MIN_I -2147483648
 # endif
 
-# ifndef MAX_INT
-#  define MAX_INT 2147483647
+# ifndef MAX_I
+#  define MAX_I 2147483647
 # endif
 
 #endif

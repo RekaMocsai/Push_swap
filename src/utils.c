@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:20:29 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/27 17:41:19 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/03/01 14:38:45 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,29 @@ void	init_stacks(int ac, char **av, t_stacks *s)
 	}
 	s->a = ft_calloc(s->a_size, sizeof(int));
 	if (!s->a)
-		free_n_quit(s, "Error, at initializing array");
+		free_n_quit(s, "Error");
 	s->b = ft_calloc(s->a_size, sizeof(int));
 	if (!s->b)
-		free_n_quit(s, "Error, at initializing array");
+		free_n_quit(s, "Error");
+}
+
+int	count_nbrs(char const *s, char c)
+{
+	int	count;
+
+	count = 0;
+	while (*s)
+	{
+		if (*s != c)
+		{
+			count++;
+			while (*s != c && *s)
+				s++;
+		}
+		else
+			s++;
+	}
+	return (count);
 }
 
 void	indexing(t_stacks *s, int *new_arr)

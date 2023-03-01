@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:53:49 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/02/27 17:40:45 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/03/01 14:45:34 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	pathfinder(t_stacks *s)
 	if (stack_sorted(s))
 		free_n_quit(s, NULL);
 	else
-		free_n_quit(s, "Error last minute - stack not sorted");
+		free_n_quit(s, "Error");
 }
 
 void	check_double_or_done(t_stacks *s)
@@ -42,7 +42,7 @@ void	check_double_or_done(t_stacks *s)
 		while (j < s->a_size)
 		{
 			if (s->a[i] == s->a[j])
-				free_n_quit(s, "Error, duplicate found");
+				free_n_quit(s, "Error");
 			j++;
 		}
 		i++;
@@ -80,11 +80,13 @@ void	validity_check(int ac, char **av)
 		{
 			if (!(ft_isdigit(av[i][j])) && (av[i][j] != ' ') && \
 			(av[i][j] != '-' && av[i][j] != '+'))
-				free_n_quit(NULL, "Error, input invalid (wrong character)");
-			else if (av[i][j] == '-' && av[i][j] == '+')
+				free_n_quit(NULL, "Error");
+			else if (av[i][j] == '-' || av[i][j] == '+')
 			{
-				if (ft_isdigit(av[i][j - 1] && j != 0))
-					free_n_quit(NULL, "Error, input invalid (invalid - or +)");
+				if (j != 0 && ft_isdigit(av[i][j - 1]))
+					free_n_quit(NULL, "Error");
+				else if (j != 0 && av[i][j - 1] == ' ' && av[i][j + 1] == ' ')
+					free_n_quit(NULL, "Error");
 			}
 			j++;
 		}
@@ -100,13 +102,13 @@ int	main(int ac, char **av)
 	validity_check(ac, av);
 	s = malloc(sizeof (*s));
 	if (s == NULL)
-		exit(1); //free_n_quit(s, "Error, at allocating struct")
+		free_n_quit(s, "Error");
 	init_stacks(ac, av, s);
 	parsing_input(ac, av, s);
 	check_double_or_done(s);
 	new_arr = ft_calloc(s->a_size, sizeof(int));
 	if (new_arr == NULL)
-		free_n_quit(s, "Error, at allocating new array");
+		free_n_quit(s, "Error");
 	indexing(s, new_arr);
 	pathfinder(s);
 	return (0);

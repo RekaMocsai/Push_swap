@@ -6,7 +6,7 @@
 #    By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 14:29:29 by rmocsai           #+#    #+#              #
-#    Updated: 2023/02/27 17:07:25 by rmocsai          ###   ########.fr        #
+#    Updated: 2023/03/01 13:06:44 by rmocsai          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,4 +78,4 @@ test: $(NAME)
 		echo "$(BLUE)Instructions count$(CLR_RM): "
 		./push_swap $(ARG) | wc -l
 		echo "$(BLUE)Valgrind result$(CLR_RM): "
-		valgrind ./push_swap $(ARG) | grep "All heap blocks were freed" | echo "$(GREEN)OK$(CLR_RM)"
+		if valgrind ./push_swap 2>&1 | grep -q "All heap blocks were freed"; then echo "$(GREEN)OK$(CLR_RM)"; else echo -e "$(RED)KO"; fi
