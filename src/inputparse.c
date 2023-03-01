@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 11:53:57 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/03/01 15:44:37 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/03/01 16:12:57 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ char	*strjoiner(int ac, char **av, t_stacks *s)
 	while (ac-- > 1)
 	{
 		if (av[i][0] == '\0' )
+		{
+			free(str1);
 			free_n_quit(s, "Error");
+		}
 		str2 = ft_strjoin(str1, " ");
 		free(str1);
 		str1 = ft_strjoin(str2, av[i++]);
