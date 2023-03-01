@@ -6,7 +6,7 @@
 /*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 11:53:57 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/03/01 15:03:30 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/03/01 15:44:37 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	parsing_input(int ac, char **av, t_stacks *s)
 void	justfree(char **temp)
 {
 	int	i;
-	
+
 	i = 0;
 	while (temp[i])
 		free(temp[i++]);
