@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
+/*   By: reka <reka@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:53:49 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/03/01 14:45:34 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/03/10 17:25:34 by reka             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	pathfinder(t_stacks *s)
 {
-	if (s->a_size == 2 && s->a[0] > s->a[1])
+	if (stack_sorted(s))
+		return;	
+	else if (s->a_size == 2 && s->a[0] > s->a[1])
 		swap(s->a, s->a_size, "sa");
 	else if (s->a_size == 3)
 		sort_three(s, 0);
@@ -24,92 +26,189 @@ void	pathfinder(t_stacks *s)
 		sort_five(s);
 	else
 		radix_sort(s);
-	if (stack_sorted(s))
-		free_n_quit(s, NULL);
-	else
-		free_n_quit(s, "Error");
+	if (!stack_sorted(s))
+		ft_printf("Error");
 }
 
-void	check_double_or_done(t_stacks *s)
+int	check_duplicates(int *arr, int count)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < s->a_size)
+	while (i < count)
 	{
 		j = i + 1;
-		while (j < s->a_size)
+		while (j < count)
 		{
-			if (s->a[i] == s->a[j])
-				free_n_quit(s, "Error");
+			if (arr[i] == arr[j])
+				return 0;
 			j++;
 		}
 		i++;
 	}
-	if (stack_sorted(s))
-		free_n_quit(s, NULL);
+	return 1;
 }
 
-void	free_n_quit(t_stacks *s, char *error)
+void	free_n_quit(t_stacks *s, t_sized_arr *sized_arr, char *error)
 {
+	char **arr;
+	
 	if (error)
 		ft_printf("%s\n", error);
-	if (s != NULL)
+
+	if (s->a != NULL)
+		free (s->a);
+	if (s->b != NULL)
+		free (s->b);
+
+	if (sized_arr->arr != NULL)
 	{
-		if (s->a != NULL)
-			free (s->a);
-		if (s->b != NULL)
-			free (s->b);
-		if (s != NULL)
-			free (s);
+		if (sized_arr->is_string_array)
+		{
+			arr = sized_arr->arr;
+			while (sized_arr->size--)
+			{
+				free(arr[sized_arr->size]);
+			}
+		}
+		free(sized_arr->arr);
 	}
 	exit(1);
 }
 
-void	validity_check(int ac, char **av)
+int	ft_isnumber(char *str)
 {
 	int	i;
-	int	j;
 
-	i = 1;
-	while (i < ac)
+	i = -1;	
+	while (str[++i])
 	{
-		j = 0;
-		while (av[i][j] != '\0')
+		if (i == 0)
 		{
-			if (!(ft_isdigit(av[i][j])) && (av[i][j] != ' ') && \
-			(av[i][j] != '-' && av[i][j] != '+'))
-				free_n_quit(NULL, "Error");
-			else if (av[i][j] == '-' || av[i][j] == '+')
-			{
-				if (j != 0 && ft_isdigit(av[i][j - 1]))
-					free_n_quit(NULL, "Error");
-				else if (j != 0 && av[i][j - 1] == ' ' && av[i][j + 1] == ' ')
-					free_n_quit(NULL, "Error");
-			}
-			j++;
+			if (!ft_isdigit(str[i]) && str[i] != '-' && str[i] != '+')
+				return (0) ;
+			if ((str[i] == '-' || str[i] == '+') && str[i + 1] == '\0')
+				return (0);
 		}
-		i++;
+		else
+		{
+			if (!ft_isdigit(str[i]))
+				return (0);
+		}
 	}
+	return (1);
+}
+
+int	ft_is_all_number(char **args, int size)
+{
+	while (size--)
+	{
+		if (!ft_isnumber(args[size]))
+			return (0);
+	}
+
+	return (1);
+}
+
+int	split_args(int ac, char **av,t_sized_arr *arr)
+{
+	int		offset;
+	int		i;
+	int 	count;
+	int		count_internal;
+	char	**split_arg;
+	char	**all_args;
+	
+	i = 0;
+	count = 0;
+	while (i++ < ac - 1)
+	{
+		count += count_nbrs(av[i], ' ');
+	}	
+	all_args = ft_calloc(count, sizeof(char *));
+	arr->size = count;
+	arr->arr = all_args;
+	
+	if (!all_args)
+		return (0);
+	
+	i = 0;
+	offset = 0;
+	while (i++ < ac - 1)
+	{
+		count_internal = count_nbrs(av[i], ' ');
+		split_arg = ft_split(av[i], ' ');
+		if (!split_arg)
+		{	
+			while (count-- > 0)
+				if (all_args[count])
+					free(all_args[count]);
+			free(all_args);
+			return (0);
+		}
+		ft_memmove(all_args + offset, split_arg, count_internal * sizeof(char *));
+		offset += count_internal;
+		free(split_arg);
+	}
+	return (1);
+}
+
+int	parse_integers(int ac, char **av,t_sized_arr *parsed_args)
+{
+	int		i;
+	char	**parsed_chars;
+	int		*parsed_ints;
+	
+	parsed_args->is_string_array = 1;
+	if (!split_args(ac, av, parsed_args) || 
+		!ft_is_all_number(parsed_args->arr, parsed_args->size))
+		return 0;
+	parsed_chars = parsed_args->arr;
+	parsed_ints = ft_calloc(parsed_args->size, sizeof(int));
+	i = -1;
+	while (++i < parsed_args->size)	
+	{
+		if (ft_newatoi(parsed_chars[i]) > MAX_I || ft_newatoi(parsed_chars[i]) < MIN_I)
+		{
+			free(parsed_ints);
+			return 0;
+		}
+		parsed_ints[i] = ft_newatoi(parsed_chars[i]);
+	}
+	while (i--)
+		free(parsed_chars[i]);
+	free(parsed_chars);
+	parsed_args->arr = parsed_ints;
+	parsed_args->is_string_array = 0;
+	return 1;
+}
+
+
+void init_structs(t_stacks *s, t_sized_arr *a)
+{
+	s->a = NULL;
+	s->b = NULL;
+	a->arr = NULL;
+	
 }
 
 int	main(int ac, char **av)
-{
-	t_stacks	*s;
-	int			*new_arr;
-
-	validity_check(ac, av);
-	s = malloc(sizeof (*s));
-	if (s == NULL)
-		free_n_quit(s, "Error");
-	init_stacks(ac, av, s);
-	parsing_input(ac, av, s);
-	check_double_or_done(s);
-	new_arr = ft_calloc(s->a_size, sizeof(int));
-	if (new_arr == NULL)
-		free_n_quit(s, "Error");
-	indexing(s, new_arr);
-	pathfinder(s);
+{	
+	t_stacks	s;
+	t_sized_arr	parsed_args;
+	
+	init_structs(&s, &parsed_args);
+	if (!parse_integers(ac, av, &parsed_args))
+		free_n_quit(&s,&parsed_args, "Error");
+	if (!check_duplicates(parsed_args.arr, parsed_args.size))
+		free_n_quit(&s,&parsed_args, "Error");
+	if (!init_stacks(parsed_args.arr, parsed_args.size, &s))
+		free_n_quit(&s,&parsed_args, "Error");
+	if (!indexing(&s))
+		free_n_quit(&s,&parsed_args, "Error");
+	
+	pathfinder(&s);
+	free_n_quit(&s,&parsed_args, NULL);
 	return (0);
 }

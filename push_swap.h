@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
+/*   By: reka <reka@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:49:51 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/03/01 15:03:55 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/03/10 16:21:54 by reka             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+
 typedef struct s_stacks
 {
 	int		*a;
@@ -25,23 +26,32 @@ typedef struct s_stacks
 	int		b_size;
 }			t_stacks;
 
+typedef struct s_sized_arr
+{
+	void	*arr;
+	int		size;
+	int 	is_string_array; 
+}			t_sized_arr;
+
 //main
-int		main(int ac, char **av);
-void	validity_check(int ac, char **av);
-void	free_n_quit(t_stacks *s, char *error);
-void	check_double_or_done(t_stacks *s);
+int		main(int ac, char **av); 
+int		ft_is_all_number(char **str, int size);
+int		split_args(int ac, char **av, t_sized_arr *arr);
+void	free_n_quit(t_stacks *s, t_sized_arr *sized_arr, char *error);
+int		check_duplicates(int *arr, int count);
 void	pathfinder(t_stacks *s);
 
 //inputparsing
-void	parsing_input(int ac, char **av, t_stacks *s);
+
+//int		parsing_input(int ac, char **av, t_stacks *s);
 void	justfree(char **temp);
 char	*strjoiner(int ac, char **av, t_stacks *s);
 long	ft_newatoi(const char *str);
 
 //utils
-void	init_stacks(int ac, char **av, t_stacks *s);
+int		init_stacks(int *arr, int count, t_stacks *s);
 int		count_nbrs(char const *s, char c);
-void	indexing(t_stacks *s, int *new_arr);
+int		indexing(t_stacks *s);
 void	bubblesort(int *new_arr, int size);
 
 //sorting
@@ -49,7 +59,7 @@ void	sort_three(t_stacks *s, int x);
 void	sort_four(t_stacks *s);
 void	sort_five(t_stacks *s);
 void	radix_sort(t_stacks *s);
-int		stack_sorted(t_stacks *s);
+int	stack_sorted(t_stacks *s);
 
 //rulez
 void	swap(int *arr, int size, char *str);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+         #
+#    By: reka <reka@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/04 10:27:01 by rmocsai           #+#    #+#              #
-#    Updated: 2023/02/10 11:39:14 by rmocsai          ###   ########.fr        #
+#    Updated: 2023/03/09 14:02:04 by reka             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,25 +41,26 @@ CC		= cc
 THEPATH = tests
 
 .PHONY: all clean fclean re norm so
+.SILENT:
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@ar -crs $(NAME) $(OBJ)
+	ar -crs $(NAME) $(OBJ)
 
 clean:
-	@rm -f $(OBJ)
-	@rm -f $(OBJ) $(BONUS_OBJ)
+	rm -f $(OBJ)
+	rm -f $(OBJ) $(BONUS_OBJ)
 
 fclean: clean
-	@rm -f $(NAME)
-	@echo "$(NAME) deleted"
+	rm -f $(NAME)
+	echo "$(NAME) deleted"
 
 re: fclean all
 
 bonus:      $(BONUS_SRC)
-	@cc -c $(FLAG) $(BONUS_SRC)
-	@ar rcs $(NAME) $(BONUS_OBJ)
+	cc -c $(FLAG) $(BONUS_SRC)
+	ar rcs $(NAME) $(BONUS_OBJ)
 
 norm: $(SRC)
 	norminette -R CheckForbiddenSourceHeader $(SRC) $(HEAD) $(BONUS_SRC)

@@ -3,77 +3,78 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
+/*   By: reka <reka@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:20:29 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/03/01 14:38:45 by rmocsai          ###   ########.fr       */
+/*   Updated: 2023/03/10 16:29:50 by reka             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	init_stacks(int ac, char **av, t_stacks *s)
+int	init_stacks(int *arr, int count, t_stacks *s)
 {
-	int	i;
-
-	i = 0;
-	s->a_size = 0;
+	s->a_size = count;
 	s->b_size = 0;
-	while (ac-- > 1)
-	{
-		s->a_size += count_nbrs(av[i + 1], ' ');
-		i++;
-	}
 	s->a = ft_calloc(s->a_size, sizeof(int));
 	if (!s->a)
-		free_n_quit(s, "Error");
+		return (0);
 	s->b = ft_calloc(s->a_size, sizeof(int));
 	if (!s->b)
-		free_n_quit(s, "Error");
+		return(0);
+	
+	ft_memmove(s->a, arr, count * sizeof(int));
+	
+	return (1);
 }
 
 int	count_nbrs(char const *s, char c)
 {
 	int	count;
+	int	i;
 
+	i = 0;
 	count = 0;
-	while (*s)
+	while (s[i] != '\0')
 	{
-		if (*s != c)
+		if (s[i] != c)
 		{
 			count++;
-			while (*s != c && *s)
-				s++;
+			while (s[i] != c && s[i])
+				i++;
 		}
 		else
-			s++;
+			i++;
 	}
 	return (count);
 }
 
-void	indexing(t_stacks *s, int *new_arr)
+int		indexing(t_stacks *s)
 {
 	int	i;
 	int	j;
-
-	i = -1;
-	while (++i < s->a_size)
-		new_arr[i] = s->a[i];
-	bubblesort(new_arr, s->a_size);
+	int *sorted;
+	
+	sorted = ft_calloc(s->a_size, sizeof(int));
+	if (!sorted)
+		return 0;
+	ft_memmove(sorted, s->a, s->a_size * sizeof(int));
+	bubblesort(sorted, s->a_size);
 	i = -1;
 	while (++i < s->a_size)
 	{
 		j = -1;
 		while (++j < s->a_size)
 		{
-			if (s->a[i] == new_arr[j])
+			if (s->a[i] == sorted[j])
 			{
 				s->a[i] = j;
-				j = s->a_size + 1;
+				break;
 			}
 		}
 	}
-	free(new_arr);
+	free(sorted);
+	return 1;
 }
 
 void	bubblesort(int *new_arr, int size)
