@@ -3,94 +3,127 @@
 /*                                                        :::      ::::::::   */
 /*   inputparse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reka <reka@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 11:53:57 by rmocsai           #+#    #+#             */
-/*   Updated: 2023/03/10 16:36:25 by reka             ###   ########.fr       */
+/*   Updated: 2023/03/14 12:35:48 by rmocsai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-// void	parsing_input(int ac, char **av, t_stacks *s) //gets **char returns **int
-// {
-// 	char	*str;
-// 	char	**temp;
-// 	int		j;
-// 	int		i;
-
-// 	str = strjoiner(ac, av, s);
-// 	temp = ft_split(str, ' ');
-// 	free(str);
-// 	j = 0;
-// 	i = 0;
-// 	while (temp[j])
-// 	{
-// 		if (ft_newatoi(temp[j]) > MAX_I || ft_newatoi(temp[j]) < MIN_I)
-// 		{
-// 			j = 0;
-// 			while (temp[j])
-// 				free(temp[j++]);
-// 			free(temp);
-// 			free_n_quit(s, "Error");
-// 		}
-// 		s->a[i++] = (int)ft_newatoi(temp[j++]);
-// 	}
-// 	justfree(temp);
-// }
-
-// void	justfree(char **temp)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (temp[i])
-// 		free(temp[i++]);
-// 	free(temp);
-// }
-
-// char	*strjoiner(int ac, char **av, t_stacks *s)
-// {
-// 	int		i;
-// 	char	*str1;
-// 	char	*str2;
-
-// 	str1 = ft_calloc(1, 1);
-// 	i = 1;
-// 	while (ac-- > 1)
-// 	{
-// 		if (av[i][0] == '\0' )
-// 		{
-// 			free(str1);
-// 			free_n_quit(s, "Error");
-// 		}
-// 		str2 = ft_strjoin(str1, " ");
-// 		free(str1);
-// 		str1 = ft_strjoin(str2, av[i++]);
-// 		free(str2);
-// 	}
-// 	return (str1);
-// }
-
-long	ft_newatoi(const char *str)
+int	ft_isnumber(char *str)
 {
-	
-	int		i;
-	int		pol;
-	long	nbr;
+	int	i;
 
-	nbr = 0;
-	pol = 1;
-	i = 0;
-	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
-		i++;
-	if (str[i] == '+' || str[i] == '-')
+	i = -1;
+	while (str[++i])
 	{
-		if (str[i] == '-')
-			pol = -1;
-		i++;
+		if (i == 0)
+		{
+			if (str[i] == '\0' || \
+			(!ft_isdigit(str[i]) && str[i] != '-' && str[i] != '+'))
+				return (0);
+			if ((str[i] == '-' || str[i] == '+') && str[i + 1] == '\0')
+				return (0);
+		}
+		else
+		{
+			if (!ft_isdigit(str[i]))
+				return (0);
+		}
 	}
-	while (ft_isdigit(str[i]))
-		nbr = nbr * 10 + (str[i++] - '0');
-	return (nbr * pol);
+	return (1);
+}
+
+int	ft_all_number(char **args, int size)
+{
+	while (size--)
+	{
+		if (!ft_isnumber(args[size]))
+			return (0);
+	}
+	return (1);
+}
+
+int	split_helper(int ac, char **av, int count, char **all_args)
+{
+	char	**split_arg;
+	int		i;
+	int		offset;
+	int		count_inter;
+
+	i = 0;
+	offset = 0;
+	count_inter = 0;
+	while (i++ < ac - 1)
+	{
+		count_inter = count_nbrs(av[i], ' ');
+		split_arg = ft_split(av[i], ' ');
+		if (!split_arg)
+		{	
+			while (count-- > 0)
+				if (all_args[count])
+					free(all_args[count]);
+			free(all_args);
+			return (0);
+		}
+		ft_memmove(all_args + offset, split_arg, count_inter * sizeof(char *));
+		offset += count_inter;
+		free(split_arg);
+	}
+	return (1);
+}
+
+int	split_args(int ac, char **av, t_sized_arr *arr)
+{
+	int		i;
+	int		count;
+	char	**all_args;
+
+	i = 0;
+	count = 0;
+	while (i++ < ac - 1)
+	{	
+		if (count_nbrs(av[i], ' ') == 0)
+			return (0);
+		count += count_nbrs(av[i], ' ');
+	}	
+	all_args = ft_calloc(count, sizeof(char *));
+	arr->size = count;
+	arr->arr = all_args;
+	if (!all_args)
+		return (0);
+	if (!split_helper(ac, av, count, all_args))
+		return (0);
+	return (1);
+}
+
+int	parse_integers(int ac, char **av, t_sized_arr *clean)
+{
+	int		i;
+	char	**parsed_chars;
+	int		*parsed_ints;
+
+	clean->is_string_array = 1;
+	if (!split_args(ac, av, clean) || !ft_all_number(clean->arr, clean->size))
+		return (0);
+	parsed_chars = clean->arr;
+	parsed_ints = ft_calloc(clean->size, sizeof(int));
+	i = -1;
+	while (++i < clean->size)
+	{
+		if (ft_atol(parsed_chars[i]) > MAXI || ft_atol(parsed_chars[i]) < MINI)
+		{
+			free(parsed_ints);
+			return (0);
+		}
+		parsed_ints[i] = ft_atol(parsed_chars[i]);
+	}
+	while (i--)
+		free(parsed_chars[i]);
+	free(parsed_chars);
+	clean->arr = parsed_ints;
+	clean->is_string_array = 0;
+	return (1);
 }

@@ -6,14 +6,13 @@
 #    By: rmocsai <rmocsai@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 14:29:29 by rmocsai           #+#    #+#              #
-#    Updated: 2023/03/01 13:06:44 by rmocsai          ###   ########.fr        #
+#    Updated: 2023/03/14 09:50:59 by rmocsai          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		push_swap
 
 CFLAGS =	-Wall -Werror -Wextra
-CFLAGS =	-Wall -Wextra
 
 CC =		cc -g
 
